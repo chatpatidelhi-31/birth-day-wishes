@@ -2,8 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import images from '../../images.json'
 
-// Generate gallery from images
-const photos = images.map((src, i) => ({
+// Generate gallery from images, limited to 12 images
+const photos = images.slice(0, 12).map((src, i) => ({
   id: i,
   src: encodeURI(src),
   alt: `Memory ${i}`
