@@ -10,7 +10,6 @@ import DreamJourney from './components/sections/DreamJourney'
 import BirthdayCake3D from './components/sections/BirthdayCake3D'
 import SpecialLetter from './components/sections/SpecialLetter'
 import PhotoGallery from './components/sections/PhotoGallery'
-import SurpriseCountdown from './components/sections/SurpriseCountdown'
 import FinalSurprise from './components/sections/FinalSurprise'
 
 function App() {
@@ -55,7 +54,6 @@ function App() {
         <BirthdayCake3D />
         <SpecialLetter />
         <PhotoGallery />
-        <SurpriseCountdown />
         <FinalSurprise />
       </AnimatePresence>
     </div>
