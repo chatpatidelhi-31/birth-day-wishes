@@ -1,16 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, Suspense, lazy } from 'react'
 import Lenis from 'lenis'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import LandingPuzzle from './components/sections/LandingPuzzle'
-import ReasonsWhy from './components/sections/ReasonsWhy'
-import LoveNotesCalendar from './components/sections/LoveNotesCalendar'
-import PolaroidWall from './components/sections/PolaroidWall'
-import DreamJourney from './components/sections/DreamJourney'
-import BirthdayCake3D from './components/sections/BirthdayCake3D'
-import SpecialLetter from './components/sections/SpecialLetter'
-import PhotoGallery from './components/sections/PhotoGallery'
-import FinalSurprise from './components/sections/FinalSurprise'
+
+// Lazy load heavy components
+const ReasonsWhy = lazy(() => import('./components/sections/ReasonsWhy'))
+const LoveNotesCalendar = lazy(() => import('./components/sections/LoveNotesCalendar'))
+const PolaroidWall = lazy(() => import('./components/sections/PolaroidWall'))
+const DreamJourney = lazy(() => import('./components/sections/DreamJourney'))
+const BirthdayCake3D = lazy(() => import('./components/sections/BirthdayCake3D'))
+const SpecialLetter = lazy(() => import('./components/sections/SpecialLetter'))
+const PhotoGallery = lazy(() => import('./components/sections/PhotoGallery'))
+const FinalSurprise = lazy(() => import('./components/sections/FinalSurprise'))
 
 function App() {
   const lenisRef = useRef(null)
@@ -47,14 +49,20 @@ function App() {
     <div className="bg-transparent text-rose-950 min-h-screen w-full relative overflow-x-hidden selection:bg-rose-gold selection:text-black">
       <AnimatePresence>
         <LandingPuzzle />
-        <ReasonsWhy />
-        <LoveNotesCalendar />
-        <PolaroidWall />
-        <DreamJourney />
-        <BirthdayCake3D />
-        <SpecialLetter />
-        <PhotoGallery />
-        <FinalSurprise />
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center bg-[#0a0508] text-rose-300 font-heading">
+            <div className="animate-pulse text-2xl">Loading magical moments...</div>
+          </div>
+        }>
+          <ReasonsWhy />
+          <LoveNotesCalendar />
+          <PolaroidWall />
+          <DreamJourney />
+          <BirthdayCake3D />
+          <SpecialLetter />
+          <PhotoGallery />
+          <FinalSurprise />
+        </Suspense>
       </AnimatePresence>
     </div>
   )

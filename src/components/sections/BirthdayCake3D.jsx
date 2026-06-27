@@ -42,7 +42,6 @@ const Candle = ({ position, onClick, isLit }) => {
           <mesh ref={flameRef}>
             <coneGeometry args={[0.04, 0.15, 16]} />
             <meshBasicMaterial color="#ffcc00" transparent opacity={0.9} />
-            <pointLight distance={1.5} intensity={0.5} color="#ffaa00" />
           </mesh>
         )}
 
@@ -88,6 +87,10 @@ const Cake = ({ litCandles, setLitCandles }) => {
 
   return (
     <group position={[0, -1, 0]}>
+      {/* Global Glow for Candles to save performance */}
+      {litCandles.some(Boolean) && (
+        <pointLight position={[0, 2, 0]} distance={5} intensity={2} color="#ffaa00" />
+      )}
       {/* Bottom Layer */}
       <mesh position={[0, 0.5, 0]}>
         <cylinderGeometry args={[2, 2, 1, 64]} />
@@ -170,7 +173,7 @@ export default function BirthdayCake3D() {
   return (
     <section ref={sectionRef} className="h-screen relative bg-[#1a0f14] overflow-hidden flex flex-col items-center justify-center cursor-crosshair">
       <div className="w-full h-full">
-        <Canvas camera={{ position: [0, 4, 8], fov: 45 }}>
+        <Canvas camera={{ position: [0, 4, 8], fov: 45 }} dpr={[1, 1.5]}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1} color="#FFF9F2" />
           
